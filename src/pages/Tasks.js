@@ -62,7 +62,7 @@ function Tasks({project}) {
       if(data.success) {
         getTasks();
         toast.success(data.message);
-        axios.post("/api/notifications/add-notification",{
+        axiosBaseUrl.post("/api/notifications/add-notification",{
           title: "Task Status Updated",
           description:`${task.taskName} has been updated to ${status}`,
           user: task.assignedBy._id,
