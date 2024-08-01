@@ -7,6 +7,7 @@
 5. Routing contains protected routes and public routes.
 6. Tailwind CSS has been used for styling.
 7. Antd Forms,Tables,Layout and Modal has been used as well.
+8. Front end has been deployed in Netlify.
 
 # Functionality
 1. Logged In User can create/edit and delete Projects.
@@ -18,11 +19,3 @@
 7. Notifications will be sent to task assigner whenever there is update to task status.
 8. Notifications will be sent whenever a new task has been assigned to assignee.
 
-
-
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
