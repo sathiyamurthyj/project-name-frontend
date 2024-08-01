@@ -1,13 +1,78 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Barlow", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button {
+  background-color: rgb(31,31,31) !important;
+  color: white !important;
+  border-radius: 0 !important;
+  height: 40px !important;
+  box-shadow: none !important;
+  margin-top:10px !important;
+  border: 1px solid rgb(200, 200, 200) !important;
+}
+
+input, select {
+  height: 40px !important;
+  border-radius: 0 !important;
+  border: 1px solid rgb(200, 200, 200) !important;
+  margin-bottom: 5px !important;
+  width: 100% !important;
+}
+
+textarea {
+  border-radius: 0 !important;
+  border: 1px solid rgb(200, 200, 200) !important;
+}
+
+input:focus , textarea:focus, select:focus {
+  box-shadow: none !important;
+  border:1px solid rgb(71, 71, 71) !important;
+}
+
+label {
+  margin-top: 5px !important;
+}
+
+table {
+  border: 1px solid #bbbbbb !important;
+}
+
+i {
+  font-size: 20px !important;
+}
+
+.pattern {
+  background-color: #80d18b;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23f6f8f3' fill-opacity='0.85' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.pattern1 {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%2367f476' fill-opacity='0.21' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.ant-pagination .ant-pagination-item-active a {
+  color: rgb(31,31,31) !important;
+  /* border: 1px solid rgb(200, 200, 200) !important; */
+}
+
+button.ant-pagination-item-link {
+  background-color: transparent !important;
+  border:none !important;
+  margin: 0 !important;
+  color: black !important;
+}
+
+li.ant-pagination-item{
+  border: 1px solid rgb(200, 200, 200) !important;
 }
