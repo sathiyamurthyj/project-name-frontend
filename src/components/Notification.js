@@ -5,9 +5,9 @@ import {useNavigate} from "react-router-dom";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import toast from "react-hot-toast";
-import axios from "axios";
 import { SetNotifications } from '../redux/usersSlice';
 import {SetLoading} from "../redux/loaderSlice";
+import axiosBaseUrl from './httpcommon';
 
 // all logic for displaying and clearing notifications
 function Notification({showModal, setShowModal}) {
@@ -18,7 +18,7 @@ function Notification({showModal, setShowModal}) {
 
   const markReadNotifications = async()=>{
     try {
-        const {data} = await axios.post("/api/notifications/mark-read-notifications",{},{headers:{authorization: localStorage.getItem("token")}});
+        const {data} = await axiosBaseUrl.post("/api/notifications/mark-read-notifications",{},{headers:{authorization: localStorage.getItem("token")}});
         if(data.success){
             console.log(data);
             dispatch(SetNotifications(data.notifications));
@@ -31,7 +31,7 @@ function Notification({showModal, setShowModal}) {
   const clearAllNotifications = async ()=>{
     try {
         dispatch(SetLoading(true));
-        const {data} = await axios.delete("/api/notifications/delete-read-notifications",{headers:{authorization: localStorage.getItem("token")}});
+        const {data} = await axiosBaseUrl.delete("/api/notifications/delete-read-notifications",{headers:{authorization: localStorage.getItem("token")}});
         dispatch(SetLoading(false));
         if(data.success){
             dispatch(SetNotifications([]));

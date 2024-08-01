@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetNotifications, SetUser } from '../redux/usersSlice';
 import { SetLoading } from '../redux/loaderSlice';
@@ -9,6 +8,7 @@ import { Avatar, Badge, Layout, Menu} from 'antd';
 import Notification from './Notification';
 import { Content, Header } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
+import axiosBaseUrl from './httpcommon';
 
 // component for protected routes which can be accessed by only valid logged in user
 // also contains basic layout
@@ -21,7 +21,7 @@ function ProtectedPage({children}) {
     const getLoggedInUser = async() => {
         try {
             dispatch(SetLoading(true));
-            const {data} = await axios.get("/api/users/logged-in-user",{headers:{authorization: localStorage.getItem("token")}});
+            const {data} = await axiosBaseUrl.get("/api/users/logged-in-user",{headers:{authorization: localStorage.getItem("token")}});
             dispatch(SetLoading(false));
             console.log(data);
             if(data.success){                
@@ -41,7 +41,7 @@ function ProtectedPage({children}) {
     const getNotifications = async()=>{
         try {
             dispatch(SetLoading(true));
-            const {data} = await axios.get("/api/notifications/user-notifications",{headers:{authorization: localStorage.getItem("token")}});
+            const {data} = await axiosBaseUrl.get("/api/notifications/user-notifications",{headers:{authorization: localStorage.getItem("token")}});
             dispatch(SetLoading(false));
             if(data.success){
                 dispatch(SetNotifications(data.notifications));

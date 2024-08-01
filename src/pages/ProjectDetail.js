@@ -2,12 +2,12 @@ import React, { Children, useEffect, useState } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import { SetLoading } from '../redux/loaderSlice';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import CustomHr from '../components/customHr';
 import {Tabs} from "antd";
 import Members from './Members';
 import Tasks from './Tasks';
+import axiosBaseUrl from "../components/httpcommon";
 
 function ProjectDetail() {
   const [myRole, setMyRole] = useState("");
@@ -20,7 +20,7 @@ function ProjectDetail() {
   const getProject = async ()=>{
     try {
       dispatch(SetLoading(true));
-      const {data} = await axios.post("/api/projects/project-by-id",{_id: params.id},{headers:{authorization: localStorage.getItem("token")}});
+      const {data} = await axiosBaseUrl.post("/api/projects/project-by-id",{_id: params.id},{headers:{authorization: localStorage.getItem("token")}});
       dispatch(SetLoading(false));
       if(data.success){
         setProject(data.project);

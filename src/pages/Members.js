@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import MemberAddForm from '../components/MemberAddForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetLoading } from '../redux/loaderSlice';
-import axios from 'axios';
 import toast from 'react-hot-toast';
+import axiosBaseUrl from "../components/httpcommon";
 
 // fills info on Members Tab of Project Details Page.Contains add/delete operations related to member
 function Members({project, reload}) {
@@ -18,7 +18,7 @@ function Members({project, reload}) {
   const deleteMember = async (memberId) => {
     try {
       dispatch(SetLoading(true));
-      const {data} = await axios.post("/api/projects/delete-member",{projectId:project._id,memberId},{headers:{authorization: localStorage.getItem("token")}});
+      const {data} = await axiosBaseUrl.post("/api/projects/delete-member",{projectId:project._id,memberId},{headers:{authorization: localStorage.getItem("token")}});
       if(data.success){
         reload();
         toast.success(data.message);

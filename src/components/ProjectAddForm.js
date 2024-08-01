@@ -3,8 +3,8 @@ import TextArea from 'antd/es/input/TextArea';
 import React, { useRef } from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import { SetLoading } from '../redux/loaderSlice';
-import axios from 'axios';
 import toast from 'react-hot-toast';
+import axiosBaseUrl from './httpcommon';
 
 // Antd form and Modal for adding Projects
 function ProjectAddForm({showModal,setShowModal, reload, project}) {
@@ -17,14 +17,14 @@ function ProjectAddForm({showModal,setShowModal, reload, project}) {
       let response = null;
       if(project){
         values._id = project._id;
-        response = await axios.post("/api/projects/edit-project",values,{headers:{authorization: localStorage.getItem("token")}});
+        response = await axiosBaseUrl.post("/api/projects/edit-project",values,{headers:{authorization: localStorage.getItem("token")}});
       } else {
         values.manager = user._id;
         values.members = [{
           user: user._id,
           role: "manager"
         },];
-        response = await axios.post("/api/projects/create-project",values,{headers:{authorization: localStorage.getItem("token")}});
+        response = await axiosBaseUrl.post("/api/projects/create-project",values,{headers:{authorization: localStorage.getItem("token")}});
       }
       if (response.data.success) {
         toast.success(response.data.message);

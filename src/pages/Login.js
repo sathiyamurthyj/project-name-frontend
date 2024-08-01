@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {Link} from "react-router-dom";
-import axios from "axios";
 import CustomHr from '../components/customHr';
 import toast from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import { SetButtonLoading } from '../redux/loaderSlice';
 import ClipLoader from "react-spinners/ClipLoader";
+import axiosBaseUrl from "../components/httpcommon";
 
 // login pages containing formik login form and yup schema for form validation
 function Login() {
@@ -58,7 +58,7 @@ function Login() {
             onSubmit={async(values,{setSubmitting, resetForm})=>{
               try {
                 dispatch(SetButtonLoading(true));
-                const {data} = await axios.post("/api/users/login", values);
+                const {data} = await axiosBaseUrl.post("/api/users/login", values);
                 dispatch(SetButtonLoading(false));
                 if(!data.success){
                   toast.error(data.message);

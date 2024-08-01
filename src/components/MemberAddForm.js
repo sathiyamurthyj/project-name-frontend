@@ -3,7 +3,7 @@ import { Modal, Form, Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { SetLoading } from '../redux/loaderSlice';
-import axios from 'axios';
+import axiosBaseUrl from './httpcommon';
 
 // Antd form and Modal for adding Members
 function MemberAddForm({showModal,setShowModal, reload, project}) {
@@ -18,7 +18,7 @@ function MemberAddForm({showModal,setShowModal, reload, project}) {
             toast.error("Already a Member of the project");
         } else {
             dispatch(SetLoading(true));
-            const {data} = await axios.post("/api/projects/add-member",{
+            const {data} = await axiosBaseUrl.post("/api/projects/add-member",{
                 projectId:project._id,
                 email: values.email,
                 role: values.role

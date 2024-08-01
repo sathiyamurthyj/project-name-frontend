@@ -50,5 +50,5 @@
   "devDependencies": {
     "tailwindcss": "^3.4.6"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "https://project-name-backend-0z22.onrender.com"
 }

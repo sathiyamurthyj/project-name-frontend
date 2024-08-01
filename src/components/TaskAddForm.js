@@ -1,10 +1,10 @@
 import { Form, Input, Modal } from 'antd'
-import TextArea from 'antd/es/input/TextArea'
-import axios from 'axios';
-import React, { useRef, useState } from 'react'
+import TextArea from 'antd/es/input/TextArea';
+import React, { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetLoading } from '../redux/loaderSlice';
+import axiosBaseUrl from './httpcommon';
 
 // Antd form and Modal for adding Tasks
 function TaskAddForm({showModal, setShowModal, project, selectedTask, reload}) {
@@ -21,16 +21,14 @@ function TaskAddForm({showModal, setShowModal, project, selectedTask, reload}) {
        dispatch(SetLoading(true));
        if(selectedTask){
         // update task
-        response = await axios.post("/api/tasks/update-task",{...values,project:project._id,_id:selectedTask._id, assignedTo: selectedTask.assignedTo._id},{headers:{authorization: localStorage.getItem("token")}});
+        response = await axiosBaseUrl.post("/api/tasks/update-task",{...values,project:project._id,_id:selectedTask._id, assignedTo: selectedTask.assignedTo._id},{headers:{authorization: localStorage.getItem("token")}});
        } else{
-            // const assignedToMember = project.members.find(member=>member.user.email === email);
-            // const assignedtoUserId = assignedToMember.user._id;
             const assignedBy = user._id;
-            response = await axios.post("/api/tasks/create-task",{...values,project:project._id,assignedTo:assignedtoUserId,assignedBy},{headers:{authorization: localStorage.getItem("token")}});
+            response = await axiosBaseUrl.post("/api/tasks/create-task",{...values,project:project._id,assignedTo:assignedtoUserId,assignedBy},{headers:{authorization: localStorage.getItem("token")}});
        };
        if(response.data.success){
             if(!selectedTask){
-                axios.post("/api/notifications/add-notification",{
+                axiosBaseUrl.post("/api/notifications/add-notification",{
                     title: `You have been assigned a new task in ${project.projectName}`,
                     description:values.description,
                     user: assignedtoUserId,

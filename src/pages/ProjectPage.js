@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import ProjectAddForm from '../components/ProjectAddForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetLoading } from '../redux/loaderSlice';
-import axios from 'axios';
 import toast from 'react-hot-toast';
+import axiosBaseUrl from "../components/httpcommon";
 
 // project page containing project add form modal and table listing projects created by user
 // only user who created project can delete.
@@ -18,7 +18,7 @@ function ProjectPage() {
   const getProjects = async ()=>{
     try {
       dispatch(SetLoading(true));
-      const {data} = await axios.post("/api/projects/all-projects",{manager: user._id},{headers:{authorization: localStorage.getItem("token")}});
+      const {data} = await axiosBaseUrl.post("/api/projects/all-projects",{manager: user._id},{headers:{authorization: localStorage.getItem("token")}});
       if(data.success){
         setProjects(data.projects);
         dispatch(SetLoading(false));
@@ -34,7 +34,7 @@ function ProjectPage() {
   const deleteProject = async(id) => {
     try {
       dispatch(SetLoading(true));
-      const {data} = await axios.post("/api/projects/delete-project",{_id:id},{headers:{authorization: localStorage.getItem("token")}});
+      const {data} = await axiosBaseUrl.post("/api/projects/delete-project",{_id:id},{headers:{authorization: localStorage.getItem("token")}});
       if(data.success){
         toast.success(data.message);
         getProjects();

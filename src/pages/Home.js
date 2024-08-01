@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { SetLoading } from '../redux/loaderSlice';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import CustomHr from "../components/customHr";
 import {useNavigate} from "react-router-dom";
+import axiosBaseUrl from "../components/httpcommon";
 
 // Home page contains projects which user is being part of.Also Meta data about project is displayed
 function Home() {
@@ -17,7 +17,7 @@ function Home() {
   const getProjects = async()=>{
     try {
       dispatch(SetLoading(true));
-      const {data} = await axios.post("/api/projects/user-projects",{userId: user._id},{headers:{authorization: localStorage.getItem("token")}});
+      const {data} = await axiosBaseUrl.post("/api/projects/user-projects",{userId: user._id},{headers:{authorization: localStorage.getItem("token")}});
       dispatch(SetLoading(false));
       if(data.success){
         setProjects(data.projects);

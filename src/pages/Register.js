@@ -3,11 +3,11 @@ import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {Link, useNavigate} from "react-router-dom";
 import CustomHr from '../components/customHr';
-import axios from 'axios';
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from 'react-redux';
 import { SetButtonLoading } from '../redux/loaderSlice';
 import ClipLoader from 'react-spinners/ClipLoader';
+import axiosBaseUrl from "../components/httpcommon";
 
 // register page containing formik registration form and yup schema for form validation
 function Register() {
@@ -59,7 +59,7 @@ function Register() {
             onSubmit={async(values,{setSubmitting, resetForm})=>{
               try {
                 dispatch(SetButtonLoading(true));
-                const {data} = await axios.post("/api/users/register", values);
+                const {data} = await axiosBaseUrl.post("/api/users/register", values);
                 dispatch(SetButtonLoading(false));
                 if(!data.success){
                   toast.error(data.message);

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import TaskAddForm from '../components/TaskAddForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetLoading } from '../redux/loaderSlice';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import CustomHr from "../components/customHr";
+import axiosBaseUrl from "../components/httpcommon";
 
 // fills info on Tasks Tab of Project Details Page.Contains crud operations related to task
 function Tasks({project}) {
@@ -23,7 +23,7 @@ function Tasks({project}) {
   const getTasks  = async ()=>{
     try {
       dispatch(SetLoading(true));
-      const {data} = await axios.post("/api/tasks/all-tasks",{project: project._id,...filters},{headers:{authorization: localStorage.getItem("token")}});
+      const {data} = await axiosBaseUrl.post("/api/tasks/all-tasks",{project: project._id,...filters},{headers:{authorization: localStorage.getItem("token")}});
       dispatch(SetLoading(false));
       if(data.success){
         setTasks(data.tasks);
@@ -40,7 +40,7 @@ function Tasks({project}) {
   const deleteTask = async(taskId) => {
     try {
       dispatch(SetLoading(true));
-      const {data} = await axios.post("/api/tasks/delete-task",{_id:taskId},{headers:{authorization: localStorage.getItem("token")}});
+      const {data} = await axiosBaseUrl.post("/api/tasks/delete-task",{_id:taskId},{headers:{authorization: localStorage.getItem("token")}});
       if(data.success) {
         getTasks();
         toast.success(data.message);
@@ -58,7 +58,7 @@ function Tasks({project}) {
   const statusUpdate = async({task, status}) => {
     try {
       dispatch(SetLoading(true));
-      const {data} = await axios.post("/api/tasks/update-task",{_id:task._id,status},{headers:{authorization: localStorage.getItem("token")}});
+      const {data} = await axiosBaseUrl.post("/api/tasks/update-task",{_id:task._id,status},{headers:{authorization: localStorage.getItem("token")}});
       if(data.success) {
         getTasks();
         toast.success(data.message);
