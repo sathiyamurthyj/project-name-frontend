@@ -19,3 +19,6 @@
 7. Notifications will be sent to task assigner whenever there is update to task status.
 8. Notifications will be sent whenever a new task has been assigned to assignee.
 
+# App Flow and Dummy Credentials
+Please refer Project Management Tool App Flow Pdf file for app usage and point 8 has dummy credentials.
+
